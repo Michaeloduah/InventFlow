@@ -1,4 +1,65 @@
-<%- include ('../layouts/header') %> 
+<%- include ('../layouts/header') %>
 
+<div class="container mt-5">
+  <h1 class="text-center">Admin Login</h1>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <img
+        src="/public/images/bg.png"
+        width="100%"
+        alt=""
+        class="img-fluid rounded"
+      />
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <form class="row g-3 m-2 needs-validation" novalidate>
+        <div class="col-md-12">
+          <label for="validationCustomEmail" class="form-label"
+            >Email:
+          </label>
+          <div class="input-group has-validation">
+            <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="Email Address"
+            id="validationCustomEmail"
+            aria-describedby="inputGroupPrepend"
+            required
+            />
+            <span class="input-group-text" id="inputGroupPrepend"
+              ><button type="button" class="btn">
+                <i class="bi bi-envelope-at"></i></button
+            ></span>
+            <div class="invalid-feedback">null</div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label for="validationCustomPassword" class="form-label">Password: </label>
+          <div class="input-group has-validation">
+            <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Password"
+            id="validationCustomPassword"
+            aria-describedby="inputGroupPrepend"
+            required
+            />
+            <span class="input-group-text" id="inputGroupPrepend"
+              ><button type="button" id="show-password" class="btn" data-bs-toggle="button" onclick="showPassword()">
+                <i class="bi bi-eye-slash-fill"></i></button
+            ></span>
+            <div class="invalid-feedback">null</div>
+          </div>
+        </div>
+        <a href="#" class="text-decoration-none text-info">Forgotten Password?</a>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <%- include ('../layouts/footer') %>

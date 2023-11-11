@@ -15,6 +15,9 @@ app.use(
   })
 );
 
+// Serve static files from the "public" directory
+app.use('/public', express.static('public'));
+
 // Set Template Engine
 app.set('view engine', 'ejs');
 
