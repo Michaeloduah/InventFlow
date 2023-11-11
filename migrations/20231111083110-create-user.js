@@ -10,33 +10,44 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       surname: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       username: {
+        type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
-        type: Sequelize.STRING
       },
       email: {
+        type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
-        type: Sequelize.STRING
+      },
+      phone: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
       },
       password: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

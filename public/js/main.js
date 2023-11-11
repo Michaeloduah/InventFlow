@@ -32,3 +32,15 @@ function showPassword() {
     password.type = 'password';
   }
 }
+
+function showConfirmPassword() {
+  var button = document.getElementById('show-confirmpassword')
+  var password = document.getElementById('validationCustomConfirmPassword')
+
+  if (password.type === 'password') {
+    password.type = 'text';
+  } else {
+    password.type = 'password';
+  }
+}
+
