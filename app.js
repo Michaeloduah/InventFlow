@@ -15,14 +15,18 @@ app.use(
   })
 );
 
+// Middleware to parse JSON and url-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Serve static files from the "public" directory
-app.use('/public', express.static('public'));
+app.use("/public", express.static("public"));
 
 // Set Template Engine
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 // Mount the routes
-app.use('/', routes);
+app.use("/", routes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

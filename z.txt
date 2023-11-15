@@ -1,0 +1,64 @@
+// app.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const path = require('path');
+const bcrypt = require('bcrypt');
+const { User } = require('./models');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Set up multer for handling image uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Specify the folder where you want to store images
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Function to handle user registration with Multer integration
+const registerUser = async (name, email, password, image) => {
+  try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user with the hashed password and image path
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      image,
+    });
+
+    return newUser;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error registering user');
+  }
+};
+
+// Registration route
+app.post('/register', upload.single('image'), async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const imagePath = req.file ? req.file.path : null; // Store the image path or URL
+
+    // Call the registration function
+    const newUser = await registerUser(name, email, password, imagePath);
+
+    res.status(201).json(newUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error registering user' });
+  }
+});
+

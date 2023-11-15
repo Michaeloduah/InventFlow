@@ -4,7 +4,7 @@
   <h1 class="text-center">Create an account</h1>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <form class="row g-3 m-2 needs-validation" novalidate>
+      <form action="/signup" method="POST" class="row g-3 m-2 needs-validation" novalidate enctype="multipart/form-data">
         <div class="col-md-6 col-sm-12 col-xs-12">
           <label for="validationCustomName" class="form-label">First Name: </label>
           <div class="input-group has-validation">
@@ -81,7 +81,11 @@
               ><button type="button" class="btn">
                 <i class="bi bi-envelope-at"></i></button
             ></span>
-            <div class="invalid-feedback">null</div>
+            <div class="invalid-feedback">
+              <% if (errors && errors.some(error => error.field === 'email')) { %>
+                <span style="color: red;"><%= errors.find(error => error.field === 'email').message %></span>
+              <% } %>
+            </div>
           </div>
         </div>
 
@@ -112,7 +116,6 @@
               type="file"
               class="form-control"
               name="image"
-              placeholder="Image"
               id="validationCustomImage"
               aria-describedby="inputGroupPrepend"
               required
@@ -161,7 +164,7 @@
             <input
               type="password"
               class="form-control"
-              name="confirm-password"
+              name="confirmpassword"
               placeholder="Confirm Password"
               id="validationCustomConfirmPassword"
               aria-describedby="inputGroupPrepend"
